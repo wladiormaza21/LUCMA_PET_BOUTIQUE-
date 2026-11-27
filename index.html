@@ -410,8 +410,8 @@
             grid.innerHTML = filtered.map(product => `
                 <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden flex flex-col justify-between card-hover">
                     <div>
-                        <div class="relative h-56 overflow-hidden bg-lucmaSky">
-                            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover">
+                        <div class="relative h-56 overflow-hidden bg-white p-2 flex items-center justify-center">
+                            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-contain">
                             ${product.tag ? `<span class="absolute top-3 left-3 bg-lucmaOrange text-white text-xs font-extrabold px-3 py-1 rounded-full shadow">${product.tag}</span>` : ''}
                         </div>
                         <div class="p-5">
