@@ -310,7 +310,7 @@
                 pet: "perros",
                 price: 28.50,
                 tag: "Más Vendido",
-                image: "https://raw.githubusercontent.com/wladiormaza21/LUCMA_PET_BOUTIQUE-/refs/heads/main/file_000000000e0881f59c63244ff01a986e_edit_200894985405395.png",
+                image: "https://raw.githubusercontent.com/wladiormaza21/LUCMA_PET_BOUTIQUE-/refs/heads/main/file_00000000e76081f5aa87fff10544d546.png",
                 description: "Cama antiestrés lavable, ideal para un descanso profundo."
             },
             {
@@ -410,8 +410,8 @@
             grid.innerHTML = filtered.map(product => `
                 <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden flex flex-col justify-between card-hover">
                     <div>
-                        <div class="relative h-56 overflow-hidden bg-white p-2 flex items-center justify-center">
-                            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-contain">
+                        <div class="relative h-56 overflow-hidden bg-lucmaSky">
+                            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover object-center">
                             ${product.tag ? `<span class="absolute top-3 left-3 bg-lucmaOrange text-white text-xs font-extrabold px-3 py-1 rounded-full shadow">${product.tag}</span>` : ''}
                         </div>
                         <div class="p-5">
