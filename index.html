@@ -1,1 +1,542 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUCMA Pets Boutique | Todo para tus mascotas</title>
+    <!-- Tailwind CSS para diseño moderno y responsivo -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Fredoka (estilo redondeado como tu logo) y Nunito -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Iconos Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        lucmaOrange: '#FF7300',
+                        lucmaOrangeHover: '#E56500',
+                        lucmaTeal: '#008B94',
+                        lucmaTealDark: '#006D75',
+                        lucmaSky: '#E6F5FE',
+                    },
+                    fontFamily: {
+                        display: ['Fredoka', 'sans-serif'],
+                        sans: ['Nunito', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #FAFAFA;
+            scroll-behavior: smooth;
+        }
+        h1, h2, h3, .brand-font {
+            font-family: 'Fredoka', sans-serif;
+        }
+        .paw-bg {
+            background-color: #E6F5FE;
+            background-image: radial-gradient(#BCE3FA 2px, transparent 2px);
+            background-size: 28px 28px;
+        }
+        .card-hover {
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px -8px rgba(0, 139, 148, 0.18);
+        }
+    </style>
+</head>
+<body class="text-gray-800 flex flex-col min-h-screen">
+
+    <!-- Barra superior de anuncios -->
+    <div class="bg-lucmaTeal text-white text-center py-2 px-4 text-sm font-bold tracking-wide">
+        🐾 ¡Envíos gratis en compras mayores a $35! • Todo para tus mascotas con amor 🧡
+    </div>
+
+    <!-- Navegación Principal -->
+    <header class="bg-white shadow-sm sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <!-- Reemplaza src="logo.png" por el nombre de tu archivo de imagen en GitHub -->
+                <img src="logo.png" alt="LUCMA Pets Boutique" onerror="this.style.display='none'; document.getElementById('fallback-logo').style.display='flex';" class="h-14 w-auto object-contain transition-transform group-hover:scale-105">
+                <div id="fallback-logo" class="hidden flex-col leading-none">
+                    <span class="brand-font text-2xl font-bold text-lucmaOrange tracking-tight">LUCMA 🐾</span>
+                    <span class="brand-font text-lg font-bold text-lucmaTeal -mt-1">Pets Boutique</span>
+                </div>
+            </a>
+
+            <!-- Enlaces Desktop -->
+            <nav class="hidden md:flex items-center gap-8 font-bold text-gray-600">
+                <a href="#inicio" class="hover:text-lucmaOrange transition">Inicio</a>
+                <a href="#catalogo" class="hover:text-lucmaOrange transition">Catálogo</a>
+                <a href="#beneficios" class="hover:text-lucmaOrange transition">¿Por qué LUCMA?</a>
+                <a href="#contacto" class="hover:text-lucmaOrange transition">Contacto</a>
+            </nav>
+
+            <!-- Buscador y Carrito -->
+            <div class="flex items-center gap-3">
+                <div class="relative hidden sm:block">
+                    <input type="text" id="searchInput" onkeyup="filterProducts()" placeholder="Buscar alimento, juguete..." 
+                           class="pl-9 pr-4 py-2 rounded-full border-2 border-lucmaSky focus:border-lucmaTeal focus:outline-none text-sm w-48 lg:w-64 transition">
+                    <i data-lucide="search" class="w-4 h-4 text-gray-400 absolute left-3 top-3"></i>
+                </div>
+
+                <button onclick="toggleCart()" class="relative bg-lucmaOrange hover:bg-lucmaOrangeHover text-white px-4 py-2.5 rounded-full font-bold flex items-center gap-2 shadow-md transition transform active:scale-95">
+                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                    <span class="hidden sm:inline">Carrito</span>
+                    <span id="cart-count" class="bg-lucmaTeal text-white text-xs font-extrabold px-2 py-0.5 rounded-full">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sección Hero (Portada) -->
+    <section id="inicio" class="paw-bg py-12 md:py-20 border-b-4 border-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-10 items-center">
+            <div class="space-y-6 text-center md:text-left">
+                <span class="inline-block bg-white text-lucmaTeal font-extrabold px-4 py-1.5 rounded-full text-sm shadow-sm">
+                    🐶 Perros • 🐱 Gatos • 🧶 Accesorios
+                </span>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-lucmaTeal leading-tight">
+                    Todo para consentir a <span class="text-lucmaOrange">tus mascotas</span>
+                </h1>
+                <p class="text-lg text-gray-600 font-semibold max-w-lg mx-auto md:mx-0">
+                    Encuentra alimentos nutritivos, camas ultra cómodas, juguetes divertidos y accesorios únicos en LUCMA Pets Boutique.
+                </p>
+                <div class="flex flex-wrap gap-4 justify-center md:justify-start pt-2">
+                    <a href="#catalogo" class="bg-lucmaOrange hover:bg-lucmaOrangeHover text-white font-bold px-8 py-4 rounded-full shadow-lg transition transform hover:-translate-y-0.5 flex items-center gap-2">
+                        Ver Productos <i data-lucide="arrow-down-circle" class="w-5 h-5"></i>
+                    </a>
+                    <a href="https://wa.me/593999999999?text=Hola%20LUCMA%20Pets%20Boutique,%20quisiera%20hacer%20una%20consulta" target="_blank" 
+                       class="bg-white hover:bg-gray-50 text-lucmaTeal border-2 border-lucmaTeal font-bold px-6 py-4 rounded-full transition flex items-center gap-2">
+                        <i data-lucide="message-circle" class="w-5 h-5"></i> Asesoría WhatsApp
+                    </a>
+                </div>
+            </div>
+
+            <!-- Tarjeta Visual Destacada -->
+            <div class="flex justify-center">
+                <div class="bg-white p-6 rounded-3xl shadow-xl border-4 border-white max-w-md w-full text-center relative">
+                    <div class="absolute -top-4 -right-4 bg-lucmaOrange text-white font-bold px-4 py-2 rounded-full shadow-md rotate-6 text-sm">
+                        ¡Nueva Colección!
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=700&q=80" 
+                         alt="Mascota feliz LUCMA" class="rounded-2xl w-full h-72 object-cover mb-4">
+                    <p class="brand-font text-xl text-lucmaTeal font-bold">Calidad y cariño en cada detalle 🧡</p>
+                    <p class="text-sm text-gray-500">Entregas rápidas y atención personalizada</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Catálogo de Productos -->
+    <main id="catalogo" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 flex-grow">
+        <div class="text-center mb-10">
+            <h2 class="text-3xl sm:text-4xl font-bold text-lucmaTeal">Nuestro Catálogo</h2>
+            <p class="text-gray-500 font-semibold mt-2">Selecciona una categoría o agrega tus productos favoritos al carrito</p>
+        </div>
+
+        <!-- Buscador Móvil -->
+        <div class="sm:hidden mb-6">
+            <input type="text" id="searchInputMobile" onkeyup="syncSearch(this.value)" placeholder="Buscar productos..." 
+                   class="w-full px-4 py-3 rounded-full border-2 border-lucmaSky focus:border-lucmaTeal focus:outline-none">
+        </div>
+
+        <!-- Filtros de Categoría -->
+        <div class="flex flex-wrap justify-center gap-3 mb-10" id="category-filters">
+            <button onclick="setCategory('todos')" data-cat="todos" class="cat-btn active bg-lucmaTeal text-white font-bold px-6 py-2.5 rounded-full shadow-sm transition">
+                Todos
+            </button>
+            <button onclick="setCategory('perros')" data-cat="perros" class="cat-btn bg-white text-gray-700 hover:bg-lucmaSky font-bold px-6 py-2.5 rounded-full border border-gray-200 transition">
+                🐶 Perros
+            </button>
+            <button onclick="setCategory('gatos')" data-cat="gatos" class="cat-btn bg-white text-gray-700 hover:bg-lucmaSky font-bold px-6 py-2.5 rounded-full border border-gray-200 transition">
+                🐱 Gatos
+            </button>
+            <button onclick="setCategory('alimentos')" data-cat="alimentos" class="cat-btn bg-white text-gray-700 hover:bg-lucmaSky font-bold px-6 py-2.5 rounded-full border border-gray-200 transition">
+                🦴 Alimentos y Snacks
+            </button>
+            <button onclick="setCategory('accesorios')" data-cat="accesorios" class="cat-btn bg-white text-gray-700 hover:bg-lucmaSky font-bold px-6 py-2.5 rounded-full border border-gray-200 transition">
+                🎀 Accesorios y Camas
+            </button>
+        </div>
+
+        <!-- Grid de Productos -->
+        <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7">
+            <!-- Los productos se cargan dinámicamente desde JavaScript -->
+        </div>
+
+        <!-- Mensaje si no hay resultados -->
+        <div id="no-results" class="hidden text-center py-12">
+            <p class="text-xl font-bold text-gray-400">No encontramos productos con esa búsqueda 🐾</p>
+        </div>
+    </main>
+
+    <!-- Sección de Beneficios -->
+    <section id="beneficios" class="bg-white py-14 border-t border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <div class="p-6 rounded-2xl bg-lucmaSky/50">
+                <div class="w-14 h-14 bg-lucmaOrange text-white rounded-2xl flex items-center justify-center mx-auto mb-4 shadow">
+                    <i data-lucide="truck" class="w-7 h-7"></i>
+                </div>
+                <h3 class="text-xl font-bold text-lucmaTeal mb-2">Envíos a Domicilio</h3>
+                <p class="text-gray-600 text-sm">Recibe tus pedidos en la puerta de tu casa de forma rápida y segura.</p>
+            </div>
+            <div class="p-6 rounded-2xl bg-lucmaSky/50">
+                <div class="w-14 h-14 bg-lucmaTeal text-white rounded-2xl flex items-center justify-center mx-auto mb-4 shadow">
+                    <i data-lucide="heart" class="w-7 h-7"></i>
+                </div>
+                <h3 class="text-xl font-bold text-lucmaTeal mb-2">Productos Seleccionados</h3>
+                <p class="text-gray-600 text-sm">Curamos cada artículo pensando en la salud, seguridad y felicidad de tu peludo.</p>
+            </div>
+            <div class="p-6 rounded-2xl bg-lucmaSky/50">
+                <div class="w-14 h-14 bg-lucmaOrange text-white rounded-2xl flex items-center justify-center mx-auto mb-4 shadow">
+                    <i data-lucide="shield-check" class="w-7 h-7"></i>
+                </div>
+                <h3 class="text-xl font-bold text-lucmaTeal mb-2">Compra Fácil y Segura</h3>
+                <p class="text-gray-600 text-sm">Arma tu carrito y coordina tu pago por transferencia, efectivo o tarjeta vía WhatsApp.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contacto" class="bg-lucmaTealDark text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <h3 class="text-2xl font-bold text-lucmaOrange mb-2">LUCMA Pets Boutique</h3>
+                <p class="text-teal-100 text-sm leading-relaxed">
+                    Todo para tus mascotas. Encuentra amor, estilo y bienestar para perros y gatos en un solo lugar.
+                </p>
+            </div>
+            <div>
+                <h4 class="font-bold text-lg mb-3">Enlaces Rápidos</h4>
+                <ul class="space-y-2 text-sm text-teal-100">
+                    <li><a href="#inicio" class="hover:text-white">Inicio</a></li>
+                    <li><a href="#catalogo" class="hover:text-white">Catálogo Completo</a></li>
+                    <li><a href="#beneficios" class="hover:text-white">Envíos y Garantía</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-lg mb-3">Contáctanos</h4>
+                <p class="text-sm text-teal-100 mb-2">📍 Ecuador • Envíos locales y nacionales</p>
+                <p class="text-sm text-teal-100 mb-4">📱 WhatsApp: +593 99 999 9999</p>
+                <div class="flex gap-3">
+                    <a href="#" class="bg-white/10 hover:bg-lucmaOrange p-2.5 rounded-full transition">
+                        <i data-lucide="instagram" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="bg-white/10 hover:bg-lucmaOrange p-2.5 rounded-full transition">
+                        <i data-lucide="facebook" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 pt-6 border-t border-teal-700 text-center text-xs text-teal-200">
+            © 2026 LUCMA Pets Boutique. Todos los derechos reservados.
+        </div>
+    </footer>
+
+    <!-- Panel Lateral del Carrito (Drawer) -->
+    <div id="cart-modal" class="fixed inset-0 bg-black/50 z-50 hidden backdrop-blur-sm transition-opacity">
+        <div class="fixed right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl flex flex-col justify-between p-6">
+            <!-- Cabecera del Carrito -->
+            <div class="flex items-center justify-between border-b pb-4">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="shopping-bag" class="w-6 h-6 text-lucmaOrange"></i>
+                    <h3 class="text-2xl font-bold text-lucmaTeal">Tu Carrito</h3>
+                </div>
+                <button onclick="toggleCart()" class="p-2 hover:bg-gray-100 rounded-full text-gray-500">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+
+            <!-- Lista de Productos en el Carrito -->
+            <div id="cart-items" class="flex-grow overflow-y-auto py-4 space-y-4">
+                <p class="text-center text-gray-400 py-10">Tu carrito está vacío 🐾</p>
+            </div>
+
+            <!-- Resumen y Botón WhatsApp -->
+            <div class="border-t pt-4 space-y-4">
+                <div class="flex justify-between items-center text-lg font-extrabold">
+                    <span class="text-gray-700">Total a pagar:</span>
+                    <span id="cart-total" class="text-2xl text-lucmaOrange">$0.00</span>
+                </div>
+                
+                <div>
+                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Tu Nombre (para el pedido)</label>
+                    <input type="text" id="customer-name" placeholder="Ej. María Pérez" 
+                           class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:border-lucmaTeal focus:outline-none text-sm">
+                </div>
+
+                <button onclick="checkoutWhatsApp()" class="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold py-3.5 px-6 rounded-full shadow-lg flex items-center justify-center gap-2 transition">
+                    <i data-lucide="send" class="w-5 h-5"></i> Finalizar Pedido por WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notificación Toast -->
+    <div id="toast" class="fixed bottom-5 left-1/2 -translate-x-1/2 bg-lucmaTeal text-white font-bold px-6 py-3 rounded-full shadow-xl opacity-0 pointer-events-none transition-opacity duration-300 z-50">
+        ¡Producto agregado al carrito! 🐾
+    </div>
+
+    <!-- Lógica de la Tienda (Productos y Carrito) -->
+    <script>
+        // 1. CONFIGURACIÓN DE TU TIENDA (Edita tu número de WhatsApp aquí, con código de país sin +)
+        const WHATSAPP_NUMBER = "593999999999"; 
+
+        // 2. CATÁLOGO DE PRODUCTOS (Puedes agregar, quitar o editar precios e imágenes aquí)
+        const products = [
+            {
+                id: 1,
+                name: "Cama Nube Ultra Suave",
+                category: "accesorios",
+                pet: "perros",
+                price: 28.50,
+                tag: "Más Vendido",
+                image: "https://images.unsplash.com/photo-1591946614720-90a587da4a36?auto=format&fit=crop&w=500&q=80",
+                description: "Cama antiestrés lavable, ideal para un descanso profundo."
+            },
+            {
+                id: 2,
+                name: "Rascador Torre para Gatos",
+                category: "accesorios",
+                pet: "gatos",
+                price: 34.00,
+                tag: "Nuevo",
+                image: "https://images.unsplash.com/photo-1545249390-6bdfa286032f?auto=format&fit=crop&w=500&q=80",
+                description: "Poste de sisal natural con pompón interactivo."
+            },
+            {
+                id: 3,
+                name: "Alimento Premium Adultos 4kg",
+                category: "alimentos",
+                pet: "perros",
+                price: 22.00,
+                tag: "Nutrición",
+                image: "https://images.unsplash.com/photo-1589924691995-400dc9ecc119?auto=format&fit=crop&w=500&q=80",
+                description: "Con proteína de salmón, omega 3 y 6 para pelaje brillante."
+            },
+            {
+                id: 4,
+                name: "Arnés Ergonómico Reflectivo",
+                category: "accesorios",
+                pet: "perros",
+                price: 16.50,
+                tag: "",
+                image: "https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?auto=format&fit=crop&w=500&q=80",
+                description: "Ajustable, acolchado y seguro para paseos nocturnos."
+            },
+            {
+                id: 5,
+                name: "Snacks Naturales de Pollo",
+                category: "alimentos",
+                pet: "perros",
+                price: 6.50,
+                tag: "100% Natural",
+                image: "https://images.unsplash.com/photo-1582798358481-d199fb7347bb?auto=format&fit=crop&w=500&q=80",
+                description: "Premios deshidratados sin conservantes artificiales."
+            },
+            {
+                id: 6,
+                name: "Fuente Bebedero Automática",
+                category: "accesorios",
+                pet: "gatos",
+                price: 24.99,
+                tag: "Top Gatos",
+                image: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=500&q=80",
+                description: "Agua fresca y filtrada en movimiento todo el día."
+            },
+            {
+                id: 7,
+                name: "Pack Juguetes Mordedores",
+                category: "perros",
+                pet: "perros",
+                price: 12.00,
+                tag: "Oferta",
+                image: "https://images.unsplash.com/photo-1576201836106-db1758fd1c97?auto=format&fit=crop&w=500&q=80",
+                description: "Set de 3 cuerdas resistentes para limpieza dental y juego."
+            },
+            {
+                id: 8,
+                name: "Alimento Húmedo Gourmet Gatos",
+                category: "alimentos",
+                pet: "gatos",
+                price: 3.25,
+                tag: "",
+                image: "https://images.unsplash.com/photo-1574158622682-e40e69881006?auto=format&fit=crop&w=500&q=80",
+                description: "Trozos de atún en salsa nutritiva enriquecida con taurina."
+            }
+        ];
+
+        let cart = [];
+        let currentCategory = 'todos';
+
+        // Renderizar productos en pantalla
+        function renderProducts() {
+            const grid = document.getElementById('products-grid');
+            const noResults = document.getElementById('no-results');
+            const searchText = document.getElementById('searchInput').value.toLowerCase();
+
+            const filtered = products.filter(p => {
+                const matchesCat = currentCategory === 'todos' || p.category === currentCategory || p.pet === currentCategory;
+                const matchesSearch = p.name.toLowerCase().includes(searchText) || p.description.toLowerCase().includes(searchText);
+                return matchesCat && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                noResults.classList.remove('hidden');
+                return;
+            }
+
+            noResults.classList.add('hidden');
+            grid.innerHTML = filtered.map(product => `
+                <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden flex flex-col justify-between card-hover">
+                    <div>
+                        <div class="relative h-56 overflow-hidden bg-lucmaSky">
+                            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover">
+                            ${product.tag ? `<span class="absolute top-3 left-3 bg-lucmaOrange text-white text-xs font-extrabold px-3 py-1 rounded-full shadow">${product.tag}</span>` : ''}
+                        </div>
+                        <div class="p-5">
+                            <span class="text-xs font-bold uppercase tracking-wider text-lucmaTeal">${product.pet}</span>
+                            <h3 class="text-lg font-bold text-gray-800 mt-1">${product.name}</h3>
+                            <p class="text-sm text-gray-500 mt-1 line-clamp-2">${product.description}</p>
+                        </div>
+                    </div>
+                    <div class="px-5 pb-5 pt-2 flex items-center justify-between">
+                        <span class="text-2xl font-extrabold text-lucmaTeal">$${product.price.toFixed(2)}</span>
+                        <button onclick="addToCart(${product.id})" 
+                                class="bg-lucmaOrange hover:bg-lucmaOrangeHover text-white font-bold px-4 py-2.5 rounded-full text-sm flex items-center gap-1.5 shadow transition active:scale-95">
+                            <i data-lucide="plus" class="w-4 h-4"></i> Agregar
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+
+            lucide.createIcons();
+        }
+
+        // Cambiar filtro de categoría
+        function setCategory(cat) {
+            currentCategory = cat;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                if (btn.dataset.cat === cat) {
+                    btn.classList.remove('bg-white', 'text-gray-700', 'border');
+                    btn.classList.add('bg-lucmaTeal', 'text-white');
+                } else {
+                    btn.classList.add('bg-white', 'text-gray-700', 'border');
+                    btn.classList.remove('bg-lucmaTeal', 'text-white');
+                }
+            });
+            renderProducts();
+        }
+
+        function syncSearch(val) {
+            document.getElementById('searchInput').value = val;
+            renderProducts();
+        }
+
+        function filterProducts() {
+            renderProducts();
+        }
+
+        // Funciones del Carrito
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            const existing = cart.find(item => item.id === id);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({ ...product, qty: 1 });
+            }
+            updateCartUI();
+            showToast();
+        }
+
+        function changeQty(id, delta) {
+            const item = cart.find(i => i.id === id);
+            if (!item) return;
+            item.qty += delta;
+            if (item.qty <= 0) {
+                cart = cart.filter(i => i.id !== id);
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const countEl = document.getElementById('cart-count');
+            const itemsEl = document.getElementById('cart-items');
+            const totalEl = document.getElementById('cart-total');
+
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+            countEl.textContent = totalItems;
+            totalEl.textContent = `$${totalPrice.toFixed(2)}`;
+
+            if (cart.length === 0) {
+                itemsEl.innerHTML = `<p class="text-center text-gray-400 py-10">Tu carrito está vacío 🐾</p>`;
+                return;
+            }
+
+            itemsEl.innerHTML = cart.map(item => `
+                <div class="flex items-center gap-3 bg-gray-50 p-3 rounded-2xl border border-gray-100">
+                    <img src="${item.image}" alt="${item.name}" class="w-16 h-16 rounded-xl object-cover">
+                    <div class="flex-grow">
+                        <h4 class="font-bold text-sm text-gray-800">${item.name}</h4>
+                        <p class="text-lucmaOrange font-extrabold text-sm">$${(item.price * item.qty).toFixed(2)}</p>
+                    </div>
+                    <div class="flex items-center gap-2 bg-white px-2 py-1 rounded-full border">
+                        <button onclick="changeQty(${item.id}, -1)" class="text-gray-500 hover:text-lucmaOrange font-bold px-1">-</button>
+                        <span class="text-sm font-bold w-4 text-center">${item.qty}</span>
+                        <button onclick="changeQty(${item.id}, 1)" class="text-gray-500 hover:text-lucmaTeal font-bold px-1">+</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleCart() {
+            const modal = document.getElementById('cart-modal');
+            modal.classList.toggle('hidden');
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.remove('opacity-0');
+            setTimeout(() => toast.classList.add('opacity-0'), 2000);
+        }
+
+        // Enviar pedido estructurado a WhatsApp
+        function checkoutWhatsApp() {
+            if (cart.length === 0) {
+                alert("Agrega al menos un producto a tu carrito antes de pedir.");
+                return;
+            }
+            const name = document.getElementById('customer-name').value.trim() || "Cliente";
+            let message = `¡Hola *LUCMA Pets Boutique*! 🐾\nSoy *${name}* y me gustaría realizar el siguiente pedido:\n\n`;
+            
+            cart.forEach(item => {
+                message += `• ${item.qty}x ${item.name} ($${(item.price * item.qty).toFixed(2)})\n`;
+            });
+
+            const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            message += `\n*Total estimado: $${total.toFixed(2)}*\n\n¿Me ayudan confirmando disponibilidad y método de envío?`;
+
+            const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        // Inicializar tienda
+        renderProducts();
+        lucide.createIcons();
+    </script>
+</body>
+</html>
